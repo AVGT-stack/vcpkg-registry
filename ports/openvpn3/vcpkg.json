@@ -8,7 +8,6 @@
         "openssl",
         "jsoncpp",
         "asio",
-        "ovpn-dco-win",
 		"tap-windows6"
     ]
 }

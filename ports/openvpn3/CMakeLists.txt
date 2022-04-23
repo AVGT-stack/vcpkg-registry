@@ -12,10 +12,7 @@ if(WIN32)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /bigobj")
 endif()
 
-add_definitions(-DNOMINMAX -DUSE_ASIO -DUSE_MBEDTLS -D_WIN32_WINNT=0x0600)
-if(LINUX)
-  add_compile_options(-include bits/endian.h)
-endif()
+add_definitions(-DNOMINMAX -DUSE_ASIO -DUSE_OPENSSL -D_WIN32_WINNT=0x0600)
 
 add_library(ovpncli client/ovpncli.cpp)
 target_link_libraries(ovpncli PRIVATE Iphlpapi.lib Wininet.lib Setupapi.lib Cfgmgr32.lib Rpcrt4.lib Fwpuclnt.lib Wtsapi32.lib ${MBEDTLS_LIB} ${MBEDCRYPTO_LIB} ${MBEDX509_LIB})
