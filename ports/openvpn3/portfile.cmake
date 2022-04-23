@@ -19,14 +19,15 @@ vcpkg_install_cmake()
 
 file(COPY ${SOURCE_PATH}/openvpn DESTINATION ${CURRENT_PACKAGES_DIR}/include/)
 file(COPY ${SOURCE_PATH}/client/ovpncli.hpp DESTINATION ${CURRENT_PACKAGES_DIR}/include/openvpn/)
+file(COPY ${SOURCE_PATH}/client/ovpncli.cpp DESTINATION ${CURRENT_PACKAGES_DIR}/include/openvpn/)
 
 file(GLOB_RECURSE HEADERS ${CURRENT_PACKAGES_DIR}/include/openvpn/*)
 foreach(HEADER IN LISTS HEADERS)
     file(READ "${HEADER}" _contents)
     string(REPLACE "defined(USE_ASIO)" "1" _contents "${_contents}")
     string(REPLACE "#ifdef USE_ASIO\n" "#if 1\n" _contents "${_contents}")
-    string(REPLACE "defined(USE_MBEDTLS)" "1" _contents "${_contents}")
-    string(REPLACE "#ifdef USE_MBEDTLS\n" "#if 1\n" _contents "${_contents}")
+    string(REPLACE "defined(USE_OPENSSL)" "1" _contents "${_contents}")
+    string(REPLACE "#ifdef USE_OPENSSL\n" "#if 1\n" _contents "${_contents}")
     file(WRITE "${HEADER}" "${_contents}")
 endforeach()
 
